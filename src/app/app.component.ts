@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderService } from '../services/order.services';
 import { Order } from '../models/order.model';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+
 import { OrderDialogComponent } from '../components/order-dialog/order-dialog.component';
 // import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 
@@ -49,11 +51,24 @@ export class AppComponent implements OnInit {
     });
   }
 
-  deleteOrder(id: number) {
-    if (confirm('Are you sure you want to delete this order?')) {
-      this.orderService.deleteOrder(id).subscribe(() => {
-        this.loadOrders();
-      });
-    }
+  // deleteOrder(id: number) {
+  //   if (confirm('Are you sure you want to delete this order?')) {
+  //     this.orderService.deleteOrder(id).subscribe(() => {
+  //       this.loadOrders();
+  //     });
+  //   }
+  // }
+  deleteOrder(orderId: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: { message: 'Are you sure you want to delete this order?' },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.deleteOrder(orderId);
+      }
+    });
   }
+  
 }

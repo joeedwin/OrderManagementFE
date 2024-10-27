@@ -14,13 +14,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrderDialogComponent } from '../components/order-dialog/order-dialog.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 
 @NgModule({
   declarations: [
     OrderDialogComponent,
-    AppComponent
+    AppComponent,
+    ConfirmationDialogComponent,
+    
+
   ],
   imports: [
     BrowserModule,
